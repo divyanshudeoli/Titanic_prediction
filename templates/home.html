@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* {
+  box-sizing: content-box;
+}
+
+body{
+    background-image: url({{url_for('static',filename="titanicsunk.jpg")}});
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+input[type=number], input[type=range] ,select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  width: 80%;
+  }
+
+.container {
+  width: 25%;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  margin: auto;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 60%;
+  margin-top: 6px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.result{
+  width:25%;
+  position: absolute;
+  bottom: 17%;
+  left: 35%;
+  background-color: #f2f2f2;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+  <form action="{{url_for('predict')}}" method="post">
+  <div class="row">
+    <div class="col-25">
+      <label for name="Pclass">PClass</label>
+    </div>
+    <div class="col-75">
+      <select name="Pclass" id="Pclass">
+      <option value=1>1</option>
+      <option value=2>2</option>
+      <option value=3>3</option>
+    </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for name="Gender">Gender</label>
+    </div>
+    <div class="col-75">
+      <input type="radio" name="Gender" id="Male" value=0>
+      <label for id="Male">Male</label>
+      <input type="radio" name="Gender" id="Female" value=1>
+      <label for id="Female">Female</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for name="Age">Age</label>
+    </div>
+    <div class="col-75">
+      <input type="number" placeholder ="Age" name="Age">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for name="Fare">Fare</label>  
+    </div>
+    <div class="col-75">
+      <input type="range" min="0" max="500" value="50" name="Fare">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+     <label for name="Family">Family members</label> 
+    </div>
+    <div class="col-75">
+     <select name="Family" id="Family">
+      <option value=0>0</option>
+      <option value=1>1</option>
+      <option value=2>2</option>
+      <option value=3>3</option>
+      <option value=4>4</option>
+      <option value=5>5</option>
+      <option value=6>6</option>
+      <option value=7>7</option>
+      <option value=8>8</option>
+      <option value=9>9</option>
+      <option value=10>10</option>
+    </select> 
+    </div>
+  </div>
+  <div class="row">
+    <input type="submit" value="Submit">
+  </div>
+  </form>
+</div>
+<div class="result">
+  {{ prediction_text}}
+</div>
+</body>
+</html>
