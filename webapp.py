@@ -30,19 +30,6 @@ def fare_discrete(f):
 def predict():    
     int_features = [int(x) for x in request.form.values()]
     features =np.array(int_features)
-    '''string g=request.form['Gender'].ToString();
-    f=request.form['Fare']
-    ag=request.form['Age']
-    string em=request.form['Embarked'].ToString();
-    final_features=[g,f,ag,em]'''
-    #prediction = model.predict(final_features)
-    #output = round(prediction[0], 2)
-    #Pclass=request.form['Pclass']
-    #Sex=request.form['Gender']
-    #Age=request.form['Age']
-    #Fare=request.form['Fare']
-    #Family=request.form['Family']
-    #features=np.array([Pclass,Sex,Age,Fare,Family])
     features[2]=age_discrete(features[2])
     features[4]=family_discrete(features[4])
     features[3]=fare_discrete(features[3])
@@ -51,4 +38,4 @@ def predict():
     return render_template('home.html', prediction_text='Your chances of survival were {}%'.format(round(prediction,2)))
 
 if __name__=='__main__':
-	app.run(debug =True)
+	app.run(host='0.0.0.0',port=8080)
